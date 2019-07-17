@@ -1,7 +1,7 @@
 {
   "name": "wx-mini",
   "version": "1.0.0",
-  "description": "webpack构建编译打包小程序",
+  "description": "随笔刊",
   "main": "dist/app.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --watch",

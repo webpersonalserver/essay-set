@@ -1,0 +1,4 @@
+<!--index.wxml-->
+<view class="app">
+  <image class="app__tip" src="/images/common/stay.png" mode="aspectFit"></image>
+</view>
