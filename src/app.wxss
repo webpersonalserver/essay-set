@@ -1,2 +1,6 @@
 /**app.wxss**/
 @import 'sass/common.scss';
+
+page{
+  background: #f7f7f7;
+}

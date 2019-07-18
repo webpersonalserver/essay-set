@@ -34,7 +34,7 @@ module.exports = {
   */
   rules: {
     // 提示错误
-    "no-unused-vars": 2,
+    "no-unused-vars": 0,
     "no-use-before-define": 2,
     "block-scoped-var": 2,
     "no-var": 2,
