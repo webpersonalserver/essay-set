@@ -1,0 +1,10 @@
+<!--index.wxml-->
+<view class="app effects">
+  <view class="effects__module" wx:for="{{list}}" wx:key="{{index}}" bindtap="goPage" data-path="{{item.path}}">
+    <image class="effects__module_icon" src="{{item.icon}}" mode="aspectFit"></image>
+    <view class="effects__module_info">
+      <view class="effects__module_info-title">{{item.title}}</view>
+      <view class="effects__module_info-desc">{{item.desc}}</view>
+    </view>
+  </view>
+</view>

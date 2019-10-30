@@ -3,7 +3,9 @@
     "pages/home/index",
     "pages/notes/index",
     "pages/mine/index",
-    "pages/waterfall/index"
+    "pages/effects/index",
+    "pages/waterfall/index",
+    "pages/turntable/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
