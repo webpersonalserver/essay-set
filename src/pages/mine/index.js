@@ -49,7 +49,7 @@ Page({
    * 获取时间
    */
   getTimeContent () {
-    let startTime = new Date('2018-10-08 00:00:00') // 开始时间
+    let startTime = new Date('2018/10/08 00:00:00') // 开始时间
     let currentTime = new Date() // 当前时间
     let timestamp = currentTime.getTime() - startTime.getTime() // 时间戳
     let d = 0 // 天
