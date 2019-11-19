@@ -1,4 +1,34 @@
 <!--index.wxml-->
-<view class="app">
-  <image class="app__tip" src="/images/common/stay.png" mode="aspectFit"></image>
+<view class="app mine">
+  <!-- <image class="app__tip" src="/images/common/stay.png" mode="aspectFit"></image> -->
+  <view class="header">
+    <block wx:if="{{hasAuthorize}}">
+      <image class="header__avatar" src="{{wxUserInfo.avatarUrl}}" mode="aspectFit"></image>
+      <text class="header__label">{{wxUserInfo.nickName}}</text>
+      <image class="header__arrow" src="/images/common/ic_right_arrow.png" mode="aspectFit"></image>
+    </block>
+    <block wx:else>
+      <image class="header__avatar" src="/images/common/avatar.png" mode="aspectFit"></image>
+      <button open-type="getUserInfo" type="primary" lang="zh_CN" bindgetuserinfo="authorizeLogin" class="header__btn">授权登录</button>
+      <image class="header__arrow" src="/images/common/ic_right_arrow.png" mode="aspectFit"></image>
+    </block>
+  </view>
+  <view class="time" wx:if="{{hasAuthorize}}">
+    <view class="time__item">
+      <text class="time__item_label">我们相遇了(可能有些许误差哟)：</text>
+      <text class="time__item_value">{{meetTime}}</text>
+    </view>
+    <view class="time__item">
+      <text class="time__item_label">我们在这点开始了：</text>
+      <text class="time__item_value">{{startTime}}</text>
+    </view>
+    <view class="time__item">
+      <text class="time__item_label">我们相伴着：</text>
+      <text class="time__item_value">{{currentTime}}</text>
+    </view>
+    <view class="time__item">
+      <text class="time__item_label">我们经历了：</text>
+      <text class="time__item_value">{{timeText}}</text>
+    </view>
+  </view>
 </view>
