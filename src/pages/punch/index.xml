@@ -1,0 +1,9 @@
+<!--index.wxml-->
+<view class="app punch">
+  <calendar
+   style="width:100%;border:1rpx solid red;"
+   start-date="2018-01"
+   end-date="2019-01"
+   weeks-type="full-en"
+  />
+</view>

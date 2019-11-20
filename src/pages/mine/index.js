@@ -13,7 +13,7 @@ Page({
     }, {
       icon: '/images/mine/ic_punch.png',
       label: '打卡',
-      path: ''
+      path: '/pages/punch/index'
     }]
   },
   onLoad () {

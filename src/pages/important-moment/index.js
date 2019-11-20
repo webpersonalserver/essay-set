@@ -62,9 +62,9 @@ Page({
   // 处理时间格式
   handleTime (t) {
     if (t < 10) {
-      return `0${t}`
+      return `0${parseInt(t)}`
     } else {
-      return t
+      return parseInt(t)
     }
   }
 })
