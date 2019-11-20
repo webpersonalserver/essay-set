@@ -1,4 +1,6 @@
 //app.js
+import commonFun from 'src/utils/common.js'
+
 App({
   data: {},
   globalData: {
@@ -6,10 +8,13 @@ App({
     hasAuthorize: false, // 是否授权，true：已授权；false：未授权
     wxUserInfo: {} // 微信用户信息
   },
+  commonFun,
   onLaunch () {
     this.initProgram()
   },
   initProgram () {
+    this.commonFun.showLoading()
+
     return new Promise((resolve, reject) => {
       // 判断用户是否已经授权用户信息
       wx.getSetting({
@@ -18,6 +23,7 @@ App({
             this.globalData.hasAuthorize = true
             // 可以直接调用 getUserInfo 获取头像昵称
             wx.getUserInfo({
+              lang: 'zh_CN',
               success: resUserInfo => {
                 this.globalData.wxUserInfo = resUserInfo.userInfo
                 resolve({
@@ -32,6 +38,15 @@ App({
               message: '未授权'
             })
           }
+        },
+        fail: err => {
+          resolve({
+            msgCode: 1, // 1：未授权；2：已授权
+            message: '未授权'
+          })
+        },
+        complete: () => {
+          this.commonFun.hideLoading()
         }
       })
     })

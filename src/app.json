@@ -5,7 +5,8 @@
     "pages/mine/index",
     "pages/effects/index",
     "pages/waterfall/index",
-    "pages/turntable/index"
+    "pages/turntable/index",
+    "pages/important-moment/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

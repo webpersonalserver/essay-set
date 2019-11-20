@@ -12,19 +12,30 @@
     &__avatar{
       width: 100rpx;
       height: 100rpx;
-      // background: #cdcdcd;
-      border-radius: 100%;
     }
     &__arrow{
       width: 30rpx;
       height: 34rpx;
       margin-left: 20rpx;
     }
-    &__label{
+    &__info{
       flex: 1;
       margin-left: 30rpx;
-      font-size: 32rpx;
-      color: #333;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &_name{
+        font-size: 32rpx;
+        color: #333;
+      }
+      &_other{
+        &-label{
+          font-size: 28rpx;
+          color: #999;
+          margin-right: 10rpx;
+        }
+      }
     }
     &__btn{
       flex: 1;
@@ -43,32 +54,68 @@
       border: none;
     }
   }
-  .time{
+  .open{
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 300rpx;
+    position: relative;
+
+    &__icon{
+      width: 200rpx;
+      height: 200rpx;
+    }
+    &__point{
+      width: 100%;
+      text-align: center;
+      line-height: 44rpx;
+      font-size: 30rpx;
+      color: #ff6347;
+      margin-top: 20rpx;
+    }
+    &__btn{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: transparent!important;
+      padding: 0;
+    }
+    button::after{
+      border: none;
+    }
+  }
+  .list{
     margin: 20rpx 30rpx;
+    padding: 20rpx;
     overflow: hidden;
     box-sizing: border-box;
     background-color: white;
-    border-radius: 8rpx;
-    padding: 20rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     &__item{
-      width: 100%;
+      flex: 1;
       overflow: hidden;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      align-items: center;
 
-      &_label{
-        color: #999;
-        font-size: 30rpx;
-        line-height: 44rpx;
+      &_icon{
+        width: 60rpx;
+        height: 60rpx;
       }
-      &_value{
-        color: #333;
-        font-size: 30rpx;
-        line-height: 60rpx;
-        padding-left: 20rpx;
+      &_label{
+        font-size: 24rpx;
+        color: #666;
+        margin-top: 10rpx;
+        line-height: 44rpx;
       }
     }
   }

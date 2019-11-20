@@ -1,0 +1,12 @@
+<!--index.wxml-->
+<view class="app moment">
+  <view class="time">
+    <view class="time__item" wx:for="{{list}}" wx:key="{{index}}">
+      <image class="time__item_icon" src="{{item.icon}}" mode="aspectFit"></image>
+      <view class="time__item_info">
+        <text class="time__item_info-label">{{item.label}}</text>
+        <text class="time__item_info-value">{{item.value}}</text>
+      </view>
+    </view>
+  </view>
+</view>

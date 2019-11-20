@@ -1,0 +1,43 @@
+/**index.wxss**/
+.moment{
+  .time{
+    margin: 20rpx 30rpx;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    &__item{
+      width: 100%;
+      overflow: hidden;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      border-radius: 8rpx;
+      padding: 20rpx;
+      background-color: white;
+      margin-bottom: 20rpx;
+
+      &_icon{
+        width: 60rpx;
+        height: 60rpx;
+      }
+      &_info{
+        flex: 1;
+        margin-left: 20rpx;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &-label{
+          color: #999;
+          font-size: 30rpx;
+          line-height: 44rpx;
+        }
+        &-value{
+          color: #333;
+          font-size: 30rpx;
+          line-height: 60rpx;
+        }
+      }
+    }
+  }
+}
