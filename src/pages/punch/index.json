@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "打卡",
   "usingComponents": {
-    "calendar": "plugin://calendar/calendar"
+    "Calendar": "../../components/calendar/index"
   }
 }

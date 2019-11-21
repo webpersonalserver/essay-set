@@ -4,7 +4,6 @@
 
 Page({
   data: {
-    message: 'webpack + 小程序'
   },
   onLoad () {}
 })

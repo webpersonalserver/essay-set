@@ -1,0 +1,26 @@
+<!-- 日历 -->
+<view class="calendar">
+  <!-- <view class="info">
+    <text class="info__title">{{clickDay.year}}-{{clickDay.month}}-{{clickDay.day}} 星期{{weeksArray[clickDay.year - 1]}}</text>
+  </view> -->
+  <view class="header">
+    <image class="header__arrow" src="{{leftArrow}}" mode="aspectFit" bindtap="clickLastOrNextMonth" data-type="last"></image>
+    <text class="header__title">{{title}}</text>
+    <image class="header__arrow" src="{{rightArrow}}" mode="aspectFit" bindtap="clickLastOrNextMonth" data-type="next"></image>
+  </view>
+  <view class="body">
+    <view class="body__weeks" wx:if="{{weeks}}">
+      <text class="body__weeks_label {{index === 5 || index === 6 ? 'body__weeks_label-red' : ''}}" wx:for="{{weeksArray}}" wx:key="{{index}}">{{item}}</text>
+    </view>
+    <view class="body__date">
+      <view class="body__date_item {{item.currentDay ? 'body__date_item-nowItem' : ''}} {{item.status ? 'body__date_item-active' : ''}}"
+        wx:for="{{dateArray}}"
+        wx:key="{{index}}"
+        bindtap="clickDay"
+        data-index="{{index}}">
+        <text class="body__date_item-solar {{item.currentMonth === 1 ? '' : 'body__date_item-gray'}} {{item.currentDay ? 'body__date_item-nowSolar' : ''}}">{{item.solar}}</text>
+        <text class="body__date_item-lunar" wx:if="{{lunar}}">{{item.lunar}}</text>
+      </view>
+    </view>
+  </view>
+</view>
