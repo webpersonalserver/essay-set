@@ -1,0 +1,21 @@
+<!-- 弹框 -->
+<view class="dialog" wx:if="{{status}}">
+  <view class="main">
+    <view class="main__title" wx:if="{{title}}">{{title}}</view>
+    <view class="main__body">
+      <textarea 
+        class="main__body_textbox"
+        placeholder-class="main__body_textplaceholder"
+        value="{{content}}"
+        bindinput="emitInput"
+        bindblur="emitBlur"
+        auto-focus="{{true}}"
+        placeholder="王小星说呐：记录生活，记录你！！！" />
+    </view>
+    <view class="main__footer" wx:if="{{showCancelBtn || showConfirmBtn}}">
+      <view class="main__footer_cancel" wx:if="{{showCancelBtn}}" bindtap="refer" data-type="cancel">{{cancelText}}</view>
+      <view class="main__footer_line" wx:if="{{showConfirmBtn && showCancelBtn}}"></view>
+      <view class="main__footer_confirm" wx:if="{{showConfirmBtn}}" bindtap="refer" data-type="confirm">{{confirmText}}</view>
+    </view>
+  </view>
+</view>

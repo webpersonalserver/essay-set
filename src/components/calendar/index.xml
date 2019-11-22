@@ -4,6 +4,7 @@
   <view class="info">
     <text class="info__date">{{clickDay.year}}-{{filter.formatDate(clickDay.month)}}-{{filter.formatDate(clickDay.day)}} 星期{{weeksArray[clickDay.week - 1]}}</text>
     <text class="info__day">{{filter.formatDate(clickDay.day)}}</text>
+    <view class="info__markContent" wx:if="{{clickDay.mark}}">你的回忆：{{clickDay.markContent}}</view>
   </view>
   <view class="header">
     <image class="header__arrow" src="{{leftArrow}}" mode="aspectFit" bindtap="clickLastOrNextMonth" data-type="last"></image>
@@ -22,7 +23,11 @@
         data-index="{{index}}">
         <text class="body__date_item-solar {{item.currentMonth === 1 ? '' : 'body__date_item-gray'}} {{item.currentDay ? 'body__date_item-nowSolar' : ''}}">{{item.solar}}</text>
         <text class="body__date_item-lunar" wx:if="{{lunar}}">{{item.lunar}}</text>
+        <image class="body__date_item-mark" src="../../images/common/ic_mark.png" mode="aspectFit" wx:if="{{item.mark}}"></image>
       </view>
     </view>
   </view>
+  <view class="btn" wx:if="{{punch}}" bindtap="clickPunch">记录生活，记录你</view>
+
+  <Dialog status="{{record.status}}" bindrefer="emitSubmit" />
 </view>

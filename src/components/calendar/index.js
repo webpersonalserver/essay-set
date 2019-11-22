@@ -5,6 +5,10 @@
 Component({
   // 私有数据，可用于模板渲染
   data: {
+    record: {
+      status: false,
+      content: ''
+    },
     title: '', // 标题
     currentIndex: -1, // 选中的日期索引
     nowDay: { // 当前日期数据
@@ -17,7 +21,9 @@ Component({
       year: '', // 年份
       month: '', // 月份
       day: '', // 天
-      week: '' // 星期
+      week: '', // 星期
+      mark: false, // 是否被标记，true：是；false：否
+      markContent: '', // 标记内容
     },
     weeksArray: ['一', '二', '三', '四', '五', '六', '日'], // 周标题数据
     showDate: '', // 当前显示的日期
@@ -42,6 +48,11 @@ Component({
     },
     // 是否显示农历日期
     lunar: {
+      type: Boolean,
+      value: true
+    },
+    // 是否显示标记打卡按钮
+    punch: {
       type: Boolean,
       value: true
     }
@@ -71,7 +82,9 @@ Component({
           year,
           month,
           day,
-          week
+          week,
+          mark: false, // 是否被标记，true：是；false：否
+          markContent: '', // 标记内容
         }
       })
       // 获取当前显示月份日期数据
@@ -100,11 +113,19 @@ Component({
       // 设置当前显示月份日期数组
       let dateArray = []
       for (let i = 2 - week; i <= days; i++) {
+        // 处理日期是否被标记
+        let markResult = this.hasMarked(i > 0 ? year : month === 0 ? year - 1 : year, i > 0 ? month : month === 0 ? 11 : month - 1, i > 0 ? i : lastDays + i)
         // 设置选中的日期索引
         if (this.data.clickDay.year === year && this.data.clickDay.month === month && this.data.clickDay.day === i) {
-          this.setData({ currentIndex: week - 2 + i })
+          this.setData({
+            currentIndex: week - 2 + i,
+            'clickDay.mark': markResult.status, // 是否被标记，true：是；false：否
+            'clickDay.markContent': markResult.content, // 标记内容
+          })
         }
         dateArray.push({
+          mark: markResult.status, // 是否被标记，true：是；false：否
+          markContent: markResult.content, // 标记内容
           status: this.data.clickDay.year === year && this.data.clickDay.month === month && this.data.clickDay.day === i ? true : false,
           currentMonth: i > 0 ? 1 : 0, // 是否为当前显示月份日期，0：上个月；1：当前月；2下个月
           currentDay: currentYear === year && currentMonth === month && i === currentDay ? true : false, // 是否为今天
@@ -119,7 +140,11 @@ Component({
       if (dateArray.length % 7 !== 0) {
         let num = 7 - dateArray.length % 7
         for (let i = 1; i <= num; i++) {
+          // 处理日期是否被标记
+          let markResult = this.hasMarked(month === 11 ? year + 1 : year, month === 11 ? 0 : month + 1, i)
           dateArray.push({
+            mark: markResult.status, // 是否被标记，true：是；false：否
+            markContent: markResult.content, // 标记内容
             status: false,
             currentMonth: 2, // 是否为当前显示月份日期，0：上个月；1：当前月；2下个月
             currentDay: false, // 是否为今天
@@ -169,7 +194,9 @@ Component({
         year,
         month,
         day,
-        week: [7, 1, 2, 3, 4, 5, 6][new Date(year, month, day).getDay()]
+        week: [7, 1, 2, 3, 4, 5, 6][new Date(year, month, day).getDay()],
+        mark: this.data.dateArray[index].mark, // 是否被标记，true：是；false：否
+        markContent: this.data.dateArray[index].markContent // 标记内容
       }
 
       // 判断是否是点击的今天
@@ -198,7 +225,9 @@ Component({
               year: info.year,
               month: info.month,
               day: info.solar,
-              week: info.week
+              week: info.week,
+              mark: info.mark, // 是否被标记，true：是；false：否
+              markContent: info.markContent // 标记内容
             },
             currentIndex: index
           })
@@ -209,7 +238,9 @@ Component({
               year: info.year,
               month: info.month,
               day: info.solar,
-              week: info.week
+              week: info.week,
+              mark: info.mark, // 是否被标记，true：是；false：否
+              markContent: info.markContent // 标记内容
             },
             currentIndex: index
           })
@@ -220,6 +251,74 @@ Component({
         } else if (info.currentMonth === 2) { // 下个月
           this.clickLastOrNextMonth('next')
         }
+      }
+    },
+    // 操作打卡
+    clickPunch () {
+      // 判断是否选中日期
+      if (this.data.currentIndex >= 0) {
+        this.setData({
+          'record.status': true
+        })
+      } else {
+        wx.showModal({
+          title: '王小雪说呐',
+          content: '小笨蛋，要选中你要记录的日期哟！！！',
+          showCancel: false,
+          confirmText: '我知道了'
+        })
+      }
+    },
+    // 关闭记录弹框
+    emitSubmit (e) {
+      if (e.detail.type === 'cancel') { // 取消
+        this.setData({
+          'record.status': false
+        })
+      } else { // 确定
+        this.setData({
+          'record.status': false,
+          'record.content': e.detail.content
+        })
+        // 存储数据
+        this.handleStorageData()
+      }
+    },
+    // 存储数据
+    handleStorageData () {
+      let recordData = wx.getStorageSync('recordData') || []
+
+      recordData.push({
+        year: this.data.clickDay.year, // 年份
+        month: this.data.clickDay.month, // 月份
+        day: this.data.clickDay.day, // 天
+        week: this.data.clickDay.week, // 星期
+        content: this.data.record.content // 记录内容
+      })
+      wx.setStorageSync('recordData', recordData)
+    },
+    /**
+     * 检查是否被标记
+     * @param {年} y 
+     * @param {月} m 
+     * @param {日} d 
+     */
+    hasMarked (y, m, d) {
+      let recordData = wx.getStorageSync('recordData') || []
+      let status = false
+      let content = ''
+
+      for (let i = 0; i < recordData.length; i++) {
+        if (y === recordData[i].year && m === recordData[i].month && d === recordData[i].day) {
+          status = true
+          content = recordData[i].content || ''
+          break
+        }
+      }
+
+      return {
+        status,
+        content
       }
     }
   }
