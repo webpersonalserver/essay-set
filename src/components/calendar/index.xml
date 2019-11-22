@@ -1,8 +1,10 @@
 <!-- 日历 -->
+<wxs src="../../wxs/filter.wxs" module="filter" />
 <view class="calendar">
-  <!-- <view class="info">
-    <text class="info__title">{{clickDay.year}}-{{clickDay.month}}-{{clickDay.day}} 星期{{weeksArray[clickDay.year - 1]}}</text>
-  </view> -->
+  <view class="info">
+    <text class="info__date">{{clickDay.year}}-{{filter.formatDate(clickDay.month)}}-{{filter.formatDate(clickDay.day)}} 星期{{weeksArray[clickDay.week - 1]}}</text>
+    <text class="info__day">{{filter.formatDate(clickDay.day)}}</text>
+  </view>
   <view class="header">
     <image class="header__arrow" src="{{leftArrow}}" mode="aspectFit" bindtap="clickLastOrNextMonth" data-type="last"></image>
     <text class="header__title">{{title}}</text>

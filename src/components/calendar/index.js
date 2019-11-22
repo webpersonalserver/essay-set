@@ -6,8 +6,8 @@ Component({
   // 私有数据，可用于模板渲染
   data: {
     title: '', // 标题
-    currentIndex: -1,
-    nowDay: { // 点击的日期数据
+    currentIndex: -1, // 选中的日期索引
+    nowDay: { // 当前日期数据
       year: '', // 年份
       month: '', // 月份
       day: '', // 天
@@ -100,6 +100,10 @@ Component({
       // 设置当前显示月份日期数组
       let dateArray = []
       for (let i = 2 - week; i <= days; i++) {
+        // 设置选中的日期索引
+        if (this.data.clickDay.year === year && this.data.clickDay.month === month && this.data.clickDay.day === i) {
+          this.setData({ currentIndex: week - 2 + i })
+        }
         dateArray.push({
           status: this.data.clickDay.year === year && this.data.clickDay.month === month && this.data.clickDay.day === i ? true : false,
           currentMonth: i > 0 ? 1 : 0, // 是否为当前显示月份日期，0：上个月；1：当前月；2下个月

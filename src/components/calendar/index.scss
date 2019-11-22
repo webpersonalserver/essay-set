@@ -7,10 +7,29 @@
 
   .info{
     width: 100%;
-    min-height: 200rpx;
+    min-height: 260rpx;
     overflow: hidden;
     box-sizing: border-box;
-    background-image: linear-gradient(to right, #59acff , #72b8ff);
+    background-color: #2ebeb7;
+    padding: 20rpx;
+    position: relative;
+
+    &__date{
+      color: white;
+      font-size: 28rpx;
+      line-height: 44rpx;
+    }
+    &__day{
+      color: white;
+      font-weight: bold;
+      font-size: 50rpx;
+      background-color:#FFCC33;
+      border-radius: 4rpx;
+      padding: 20rpx;
+      position: absolute;
+      top: 60rpx;
+      right: 100rpx;
+    }
   }
   .header{
     width: 100%;
